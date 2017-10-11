@@ -4,13 +4,9 @@ export class Haiku {
     this.line2 = line2;
     this.line3 = line3;
   }
-  // syllablesInWord(word) {
-  //   let noOfSyllables;
-  //   let noOfVowels = (word.match(/[aeiou]/gi) || []).length;
-  //   return noOfVowels;
-  //   }
-
-  // wordsInSentence(sentence) {
-  //   let
-  // }
+  syllablesInWord(word) {
+    let noOfSyllables;
+    let noOfVowels = (word.match(/[aeiou]/gi) || []).length;
+    return noOfVowels;
+    }
 }
