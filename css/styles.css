@@ -1,0 +1,15 @@
+#main
+{
+    /*Make a box with rounded corners.*/
+    border-radius: 15px; /*Give the box a light shadow.*/
+    box-shadow: 0px 0px 10px #000000; /*The width of the box must be a bit larger than the width of the paragraph.*/
+    width: 48.5em; /*The width setting, along with these margin settings, put the box in the center with the sides hugging the text.*/
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1em;
+    padding-bottom: 1em; /*Contrast is greater than outside the essay in order to focus the readers' attention.*/
+    background-color: #F0F8FF;
+    color: #382513;
+    width: 25%;
+    text-align: center;
+}

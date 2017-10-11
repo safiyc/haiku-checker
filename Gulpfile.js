@@ -22,6 +22,12 @@ var lib = require('bower-files')({
 var browserSync = require('browser-sync').create();
 var buildProduction = utilities.env.production;
 
+gulp.task('bowerCSS', function () {
+  return gulp.src(lib.ext('css').files)
+    .pipe(concat('vendor.css'))
+    .pipe(gulp.dest('./build/css'));
+});
+
 gulp.task('concatInterface', function() {
   return gulp.src(['./js/*-interface.js'])
     .pipe(concat('allConcat.js'))
@@ -62,6 +68,7 @@ gulp.task('jshint', function(){
     .pipe(jshint.reporter('default'));
 });
 
+
 gulp.task('bowerJS', function () {
   return gulp.src(lib.ext('js').files)
     .pipe(concat('vendor.min.js'))
@@ -69,11 +76,7 @@ gulp.task('bowerJS', function () {
     .pipe(gulp.dest('./build/js'));
 });
 
-gulp.task('bowerCSS', function () {
-  return gulp.src(lib.ext('css').files)
-    .pipe(concat('vendor.css'))
-    .pipe(gulp.dest('./build/css'));
-});
+
 
 gulp.task('serve', function() {
   browserSync.init({

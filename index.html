@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="build/css/vendor.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="build/js/vendor.min.js"></script>
     <script src="build/js/app.js"></script>
     <title>Haiku Checker</title>
@@ -11,10 +12,12 @@
       <div class="page-header">
         <h1>Haiku <br><small>Japanese three-lines poem</small></h1>
       </div>
-      <h1>Haiku Rules:</h1>
-      <p>Five syllables first.</p>
-      <p>Then seven syllables next.</p>
-      <p>Last sentence is five.</p>
+      <div id="main">
+        <h1>Rules:</h1>
+        <p>Five syllables first.</p>
+        <p>Then seven syllables next.</p>
+        <p>Last sentence is five.</p>
+      </div>
       <br>
       <form id='haiku'>
         <div class="form-group">
@@ -31,6 +34,9 @@
         </div>
         <button type="submit" class='btn btn-danger'>Submit</button>
       </form>
+      <div class="result">
+
+      </div>
     </div>
   </body>
 </html>
