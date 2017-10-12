@@ -6,8 +6,6 @@ var uglify = require('gulp-uglify');
 var utilities = require('gulp-util');
 var del = require('del');
 var jshint = require('gulp-jshint');
-var babelify = require("babelify");
-
 var lib = require('bower-files')({
   "overrides":{
     "bootstrap" : {
@@ -20,14 +18,11 @@ var lib = require('bower-files')({
   }
 });
 var browserSync = require('browser-sync').create();
+var babelify = require("babelify");
+
 var buildProduction = utilities.env.production;
 
-gulp.task('bowerCSS', function () {
-  return gulp.src(lib.ext('css').files)
-    .pipe(concat('vendor.css'))
-    .pipe(gulp.dest('./build/css'));
-});
-
+// Building App
 gulp.task('concatInterface', function() {
   return gulp.src(['./js/*-interface.js'])
     .pipe(concat('allConcat.js'))
@@ -54,30 +49,39 @@ gulp.task("clean", function(){
   return del(['build', 'tmp']);
 });
 
-gulp.task("build", ['clean'], function(){
+gulp.task('build', ['clean'], function(){
   if (buildProduction) {
     gulp.start('minifyScripts');
   } else {
     gulp.start('jsBrowserify');
   }
+  gulp.start('bower', 'cssBuild');
 });
 
+// Linter
 gulp.task('jshint', function(){
   return gulp.src(['js/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
-
+// Bower Stuff to build front-end vendor files
 gulp.task('bowerJS', function () {
-  return gulp.src(lib.ext('js').files)
+  return gulp.src(lib.ext("js").files)
     .pipe(concat('vendor.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./build/js'));
 });
 
+gulp.task('bowerCSS', function () {
+  return gulp.src(lib.ext('css').files)
+    .pipe(concat('vendor.css'))
+    .pipe(gulp.dest('./build/css'));
+});
 
+gulp.task('bower', ['bowerJS', 'bowerCSS']);
 
+// Server things
 gulp.task('serve', function() {
   browserSync.init({
     server: {
@@ -85,11 +89,11 @@ gulp.task('serve', function() {
       index: "index.html"
     }
   });
-
   gulp.watch(['js/*.js'], ['jsBuild']);
   gulp.watch(['bower.json'], ['bowerBuild']);
-});
+  gulp.watch(['cssBuild']);
 
+});
 
 gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function(){
   browserSync.reload();
@@ -97,4 +101,14 @@ gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function(){
 
 gulp.task('bowerBuild', ['bower'], function(){
   browserSync.reload();
+});
+
+gulp.task('cssBuild', ['css'], function(){
+  browserSync.reload();
+});
+
+gulp.task("cssBuild", function() {
+  gulp.src(['css/*.css'])
+  .pipe(concat('vendor.css'))
+  .pipe(gulp.dest('./build/css'))
 });

@@ -1,10 +1,10 @@
 {
-  "name": "haiku-checker",
+  "name": "haiku_checker",
   "version": "1.0.0",
   "description": "",
-  "main": "Gulpfile.js",
+  "main": "gulpfile.js",
   "scripts": {
-    "test": "karma start karma.conf.js"
+    "test": "nyc karma start karma.conf.js"
   },
   "author": "",
   "license": "ISC",
@@ -34,8 +34,5 @@
     "nyc": "^11.2.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
-  },
-  "dependencies": {
-    "browserify-istanbul": "^2.0.0"
   }
 }
